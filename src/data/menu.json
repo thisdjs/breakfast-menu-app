@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "name": "Avocado Toast",
+    "price": 8.99,
+    "category": "Pastries",
+    "icon": "🥑",
+    "icon-name": "avocado",
+    "image": ""
+  },
+  {
+    "id": 2,
+    "name": "Pancakes",
+    "price": 7.49,
+    "category": "Pastries",
+    "icon": "🥞",
+    "icon-name": "pancake",
+    "image": ""
+  },
+  {
+    "id": 3,
+    "name": "Classic Omelette",
+    "price": 12.5,
+    "icon": "🍳",
+    "category": "Entrée",
+    "icon-name": "omelette",
+    "image": ""
+  },
+  {
+    "id": 4,
+    "name": "Belgian Waffles",
+    "price": 11.25,
+    "icon": "🧇",
+    "category": "Entrée",
+    "icon-name": "waffle",
+    "image": ""
+  },
+  {
+    "id": 5,
+    "name": "Croissant",
+    "price": 4.5,
+    "icon": "🥐",
+    "category": "Breads",
+    "icon-name": "croissant",
+    "image": ""
+  },
+  {
+    "id": 6,
+    "name": "Sourdough Slice",
+    "price": 3.0,
+    "icon": "🍞",
+    "category": "Breads",
+    "icon-name": "bread",
+    "image": ""
+  },
+  {
+    "id": 7,
+    "name": "Bagel & Cream",
+    "price": 5.2,
+    "icon": "🥯",
+    "category": "Breads",
+    "icon-name": "bagel",
+    "image": ""
+  },
+  {
+    "id": 8,
+    "name": "Orange Juice",
+    "price": 5.5,
+    "icon": "🍊",
+    "category": "Drinks",
+    "icon-name": "orange-juice",
+    "image": ""
+  },
+  {
+    "id": 9,
+    "name": "Espresso",
+    "price": 3.5,
+    "icon": "",
+    "category": "Drinks",
+    "icon-name": "coffee-cup",
+    "image": ""
+  },
+  {
+    "id": 10,
+    "name": "Cappuccino",
+    "price": 4.75,
+    "icon": "☕",
+    "category": "Drinks",
+    "icon-name": "coffee-cup",
+    "image": ""
+  },
+  {
+    "id": 11,
+    "name": "Cinnamon Roll",
+    "price": 6.0,
+    "icon": "🍩",
+    "category": "Pastries",
+    "icon-name": "doughnut",
+    "image": ""
+  },
+  {
+    "id": 12,
+    "name": "Pain au Chocolat",
+    "price": 5.5,
+    "icon": "🍫",
+    "category": "Pastries",
+    "icon-name": "chocolate-bar",
+    "image": ""
+  },
+  {
+    "id": 13,
+    "name": "Fruit Salad",
+    "price": 6.5,
+    "category": "Sides",
+    "icon": "🥗",
+    "icon-name": "fruit-salad",
+    "image": ""
+  },
+  {
+    "id": 14,
+    "name": "Yogurt Parfait",
+    "price": 5.75,
+    "category": "Sides",
+    "icon": "🍦",
+    "icon-name": "yogurt-parfait",
+    "image": ""
+  },
+  {
+    "id": 15,
+    "name": "Bacon Strips (3)",
+    "price": 4.0,
+    "category": "Sides",
+    "icon": "🥓",
+    "icon-name": "bacon",
+    "image": ""
+  },
+  {
+    "id": 16,
+    "name": "Breakfast Sausage (2)",
+    "price": 4.25,
+    "category": "Sides",
+    "icon": "🌭",
+    "icon-name": "sausage",
+    "image": ""
+  },
+  {
+    "id": 17,
+    "name": "Latte",
+    "price": 4.75,
+    "category": "Drinks",
+    "icon": "☕",
+    "icon-name": "latte-cup",
+    "image": ""
+  },
+  {
+    "id": 18,
+    "name": "Apple Juice",
+    "price": 5.0,
+    "category": "Drinks",
+    "icon": "🧃",
+    "icon-name": "apple-juice",
+    "image": ""
+  },
+  {
+    "id": 19,
+    "name": "Iced Tea",
+    "price": 4.5,
+    "category": "Drinks",
+    "icon": "🍹",
+    "icon-name": "iced-tea",
+    "image": ""
+  },
+  {
+    "id": 20,
+    "name": "Muffin (Blueberry)",
+    "price": 3.75,
+    "category": "Pastries",
+    "icon": "🧁",
+    "icon-name": "muffin",
+    "image": ""
+  },
+  {
+    "id": 21,
+    "name": "Scone (Plain)",
+    "price": 3.5,
+    "category": "Pastries",
+    "icon": "🍪",
+    "icon-name": "scone",
+    "image": ""
+  },
+  {
+    "id": 22,
+    "name": "English Muffin",
+    "price": 3.25,
+    "category": "Breads",
+    "icon": "🍞",
+    "icon-name": "english-muffin",
+    "image": ""
+  },
+  {
+    "id": 23,
+    "name": "French Toast",
+    "price": 9.5,
+    "category": "Entrée",
+    "icon": "🍞",
+    "icon-name": "french-toast",
+    "image": ""
+  },
+  {
+    "id": 24,
+    "name": "Breakfast Burrito",
+    "price": 10.75,
+    "category": "Entrée",
+    "icon": "🌯",
+    "icon-name": "burrito",
+    "image": ""
+  },
+  {
+    "id": 25,
+    "name": "Smoothie (Strawberry Banana)",
+    "price": 7.0,
+    "category": "Healthy Options",
+    "icon": "🥤",
+    "icon-name": "smoothie",
+    "image": "strawberry-banana-"
+  },
+  {
+    "id": 26,
+    "name": "Oatmeal with Berries",
+    "price": 6.25,
+    "category": "Healthy Options",
+    "icon": "🥣",
+    "icon-name": "oatmeal",
+    "image": ""
+  },
+  {
+    "id": 27,
+    "name": "Quiche Slice (Lorraine)",
+    "price": 7.5,
+    "category": "Entrée",
+    "icon": "🥧",
+    "icon-name": "quiche",
+    "image": ""
+  },
+  {
+    "id": 28,
+    "name": "Hot Chocolate",
+    "price": 4.0,
+    "category": "Drinks",
+    "icon": "☕",
+    "icon-name": "hot-chocolate",
+    "image": ""
+  },
+  {
+    "id": 29,
+    "name": "Gluten-Free Toast (2 slices)",
+    "price": 4.5,
+    "category": "Breads",
+    "icon": "🍞",
+    "icon-name": "gluten-free-toast",
+    "image": ""
+  },
+  {
+    "id": 30,
+    "name": "Vegan Pancakes",
+    "price": 9.0,
+    "category": "Healthy Options",
+    "icon": "🥞",
+    "icon-name": "vegan-pancakes",
+    "image": ""
+  },
+  {
+    "id": 31,
+    "name": "Americano",
+    "price": 3.75,
+    "category": "Drinks",
+    "icon": "☕",
+    "icon-name": "americano-cup",
+    "image": ""
+  },
+  {
+    "id": 32,
+    "name": "Mocha",
+    "price": 5.25,
+    "category": "Drinks",
+    "icon": "☕",
+    "icon-name": "mocha-cup",
+    "image": ""
+  },
+  {
+    "id": 33,
+    "name": "Herbal Tea (Chamomile)",
+    "price": 3.5,
+    "category": "Drinks",
+    "icon": "🍵",
+    "icon-name": "herbal-tea",
+    "image": ""
+  },
+  {
+    "id": 34,
+    "name": "Green Tea",
+    "price": 3.5,
+    "category": "Drinks",
+    "icon": "🍵",
+    "icon-name": "green-tea",
+    "image": ""
+  },
+  {
+    "id": 35,
+    "name": "Chai Latte",
+    "price": 5.0,
+    "category": "Drinks",
+    "icon": "☕",
+    "icon-name": "chai-latte",
+    "image": ""
+  },
+  {
+    "id": 36,
+    "name": "Lemonade",
+    "price": 4.75,
+    "category": "Drinks",
+    "icon": "🍋",
+    "icon-name": "lemonade",
+    "image": ""
+  },
+  {
+    "id": 37,
+    "name": "Cranberry Juice",
+    "price": 5.0,
+    "category": "Drinks",
+    "icon": "🧃",
+    "icon-name": "cranberry-juice",
+    "image": ""
+  },
+  {
+    "id": 38,
+    "name": "Sparkling Water",
+    "price": 3.0,
+    "category": "Drinks",
+    "icon": "💧",
+    "icon-name": "sparkling-water",
+    "image": ""
+  },
+  {
+    "id": 39,
+    "name": "Matcha (Traditional)",
+    "price": 5.5,
+    "category": "Drinks",
+    "icon": "🍵",
+    "icon-name": "matcha-traditional",
+    "image": ""
+  },
+  {
+    "id": 40,
+    "name": "Kombucha (Ginger)",
+    "price": 6.0,
+    "category": "Drinks",
+    "icon": "🥤",
+    "icon-name": "kombucha",
+    "image": ""
+  }
+]
