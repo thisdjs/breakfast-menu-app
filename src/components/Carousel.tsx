@@ -77,7 +77,7 @@ const Carousel: React.FC<CarouselProps> = ({
   if (!items || items.length === 0) {
     return (
       <div className="py-2">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto ">
           <h2 className="text-2xl font-bold text-yellow-800 my-4">{title}</h2>
           <p className="text-gray-500">
             No items available in this category yet.
@@ -96,9 +96,11 @@ const Carousel: React.FC<CarouselProps> = ({
 
   return (
     <div className="py-2">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mt-4">
-          <h2 className="text-2xl font-bold text-yellow-800 pl-2">{title}</h2>
+      <div className="container mx-auto">
+        <div className="flex justify-between items-center mt-4 pl-2">
+          <h2 className="text-center md:text-left text-2xl font-bold text-yellow-800">
+            {title}
+          </h2>
           {showArrows && (
             <div className="flex space-x-2 mr-4">
               <button
@@ -123,7 +125,7 @@ const Carousel: React.FC<CarouselProps> = ({
         <div className="relative">
           <div
             ref={scrollContainerRef}
-            className="flex space-x-4 overflow-x-auto pl-2 py-4 scrollbar-hide"
+            className="flex space-x-4 overflow-x-auto py-4 scrollbar-hide pl-2"
           >
             {items.map((item) => (
               <ItemCard

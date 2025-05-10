@@ -15,13 +15,6 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, isSelected, onSelect }) => {
     }
   };
 
-  // Determine if the icon is an emoji or a URL/path
-  // Checks for most common emoji characters.
-  const isEmojiIcon = /\p{Emoji}/u.test(item.icon);
-  // Determine the primary visual: item.image if available, otherwise item.icon (if not an emoji meant as fallback)
-  const primaryImageSrc = item.image || (isEmojiIcon ? null : item.icon);
-
-  // Conditional styling for selected items
   const borderStyle = isSelected ? "border-yellow-700" : "border-yellow-300";
   const textStyle = isSelected ? "text-yellow-800" : "text-yellow-600";
 
@@ -52,50 +45,16 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, isSelected, onSelect }) => {
       )}
 
       <div className="flex-shrink-0 sm:mb-1">
-        {primaryImageSrc ? ( // If there's a primaryImageSrc and it's not an emoji (item.icon might be emoji if item.image is null)
-          <img
-            src={primaryImageSrc}
-            alt={item["icon-name"] || item.name} // Use item.name as fallback alt text for the main image
-            className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
-            onError={(e) => {
-              (
-                e.target as HTMLImageElement
-              ).src = `https://placehold.co/32x32/fbbf24/FFFFFF?text=${item.name.substring(
-                0,
-                2
-              )}`;
-              (
-                e.target as HTMLImageElement
-              ).alt = `Placeholder for ${item.name}`;
-            }}
-          />
-        ) : isEmojiIcon ? (
-          // If it's an emoji, render it as a larger text character
-          <span
-            className="text-xl sm:text-3xl mb-2"
-            role="img"
-            aria-label={item["icon-name"] || item.name}
-          >
-            {item.icon}
-          </span>
-        ) : (
-          // Otherwise, assume it's an image URL
-          <img
-            src={item.icon}
-            alt={item["icon-name"] || `Icon for ${item.name}`}
-            className="w-8 h-8 mb-2 object-contain text-yellow-600"
-            onError={(e) => {
-              // Fallback for broken image links
-              (e.target as HTMLImageElement).src =
-                "https://placehold.co/32x32/FBBF24/FFFFFF?text=?";
-              (
-                e.target as HTMLImageElement
-              ).alt = `Placeholder icon for ${item.name}`;
-            }}
-          />
-        )}
+        <span
+          className="text-xl sm:text-3xl mb-2"
+          role="img"
+          aria-label={item["icon-name"] || item.name}
+        >
+          {item.icon}
+        </span>
       </div>
-      <span className="text-xs font-medium ml-3 sm:ml-0 sm:my-2">
+
+      <span className="text-sm md:text-md font-medium ml-3 sm:ml-0 sm:my-2">
         {item.name}
       </span>
     </div>

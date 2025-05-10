@@ -2,6 +2,10 @@ import React, { useState, useEffect as useEffectModal } from "react";
 import type { MenuItem as MenuItemTypeModal } from "../types";
 import { XMarkIcon as ModalXMarkIcon } from "@heroicons/react/24/solid";
 
+// Simple regex to check if a string is a single emoji.
+// This is a basic check and might not cover all edge cases of complex emojis.
+const EMOJI_REGEX = /^\p{Extended_Pictographic}$/u;
+
 interface CreateItemModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -20,13 +24,35 @@ const CreateItemModal: React.FC<CreateItemModalProps> = ({
   const [category, setCategory] = useState("");
   const [icon, setIcon] = useState("");
   const [iconName, setIconName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  // State for tracking if fields have been touched (to show errors only after interaction)
+  const [touchedFields, setTouchedFields] = useState<{
+    [key: string]: boolean;
+  }>({});
 
-  const isFormValid =
-    name.trim() !== "" &&
-    price.trim() !== "" &&
-    !isNaN(parseFloat(price)) &&
-    parseFloat(price) > 0;
+  const handleBlur = (field: string) => {
+    setTouchedFields((prev) => ({ ...prev, [field]: true }));
+  };
+
+  // Validation logic
+  const nameError =
+    name.trim() === ""
+      ? "Name is required."
+      : name.trim().length > 50
+      ? "Name cannot exceed 50 characters."
+      : "";
+  const priceError =
+    price.trim() === ""
+      ? "Price is required."
+      : isNaN(parseFloat(price)) || parseFloat(price) <= 0
+      ? "Price must be a positive number."
+      : "";
+  const isIconValidEmoji = icon.trim() === "" || EMOJI_REGEX.test(icon.trim());
+  const iconError =
+    !isIconValidEmoji && icon.trim() !== ""
+      ? "Please enter a single valid emoji."
+      : "";
+
+  const isFormValid = !nameError && !priceError && !iconError;
 
   useEffectModal(() => {
     if (isOpen) {
@@ -34,7 +60,7 @@ const CreateItemModal: React.FC<CreateItemModalProps> = ({
       setPrice("");
       setIcon("");
       setIconName("");
-      setImageUrl("");
+      setTouchedFields({});
       if (categories.length > 0) {
         if (!category || !categories.includes(category)) {
           setCategory(categories[0]);
@@ -47,8 +73,12 @@ const CreateItemModal: React.FC<CreateItemModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Mark all fields as touched to show errors if submit is attempted with invalid fields
+    setTouchedFields({ name: true, price: true, icon: true });
+
     if (!isFormValid) {
-      alert("Please ensure Name and a valid Price are entered.");
+      // No alert needed, inline errors will show. Button is disabled anyway.
+      console.log("Form is invalid. Errors should be displayed.");
       return;
     }
     const newItem: Omit<MenuItemTypeModal, "id"> = {
@@ -57,7 +87,6 @@ const CreateItemModal: React.FC<CreateItemModalProps> = ({
       category: category || "Uncategorized",
       icon: icon.trim() || "❓",
       "icon-name": iconName.trim() || name.trim(),
-      image: imageUrl.trim() || undefined,
     };
     onSubmit(newItem);
     onClose();
@@ -83,7 +112,6 @@ const CreateItemModal: React.FC<CreateItemModalProps> = ({
 
   return (
     <>
-      {/* Backdrop Div */}
       <div
         className="fixed inset-0 bg-neutral-800 opacity-75 z-40 transition-opacity duration-300 ease-in-out"
         onClick={onClose}
@@ -133,7 +161,7 @@ const CreateItemModal: React.FC<CreateItemModalProps> = ({
                     {cat}
                   </option>
                 ))}
-                <option value="NEW_CATEGORY">-- Add New Category --</option>
+                {/* <option value="NEW_CATEGORY">-- Add New Category --</option> */}
               </select>
             </div>
             <div>
@@ -148,9 +176,18 @@ const CreateItemModal: React.FC<CreateItemModalProps> = ({
                 id="item-name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                onBlur={() => handleBlur("name")} // Track when field is touched
                 placeholder="Write Here..."
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none text-gray-700 placeholder-gray-400 bg-white"
+                maxLength={40}
+                className={`w-full p-3 border rounded-lg focus:ring-2 outline-none text-gray-700 placeholder-gray-400 bg-white ${
+                  touchedFields.name && nameError
+                    ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+                    : "border-gray-300 focus:ring-yellow-500 focus:border-yellow-500"
+                }`}
               />
+              {touchedFields.name && nameError && (
+                <p className="text-xs text-red-500 mt-1">{nameError}</p>
+              )}
             </div>
             <div>
               <label
@@ -164,57 +201,69 @@ const CreateItemModal: React.FC<CreateItemModalProps> = ({
                 id="item-price"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
+                onBlur={() => handleBlur("price")} // Track when field is touched
                 placeholder="Write Here..."
                 min="0.01"
                 step="0.01"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none text-gray-700 placeholder-gray-400 bg-white"
+                className={`w-full p-3 border rounded-lg focus:ring-2 outline-none text-gray-700 placeholder-gray-400 bg-white ${
+                  touchedFields.price && priceError
+                    ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+                    : "border-gray-300 focus:ring-yellow-500 focus:border-yellow-500"
+                }`}
               />
-            </div>
-            <div>
-              <label
-                htmlFor="item-image-url"
-                className="block text-sm font-medium text-gray-600 mb-1"
-              >
-                Image URL
-              </label>
-              <input
-                type="url"
-                id="item-image-url"
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
-                placeholder="https://example.com/image.jpg"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none text-gray-700 placeholder-gray-400 bg-white"
-              />
+              {touchedFields.price && priceError && (
+                <p className="text-xs text-red-500 mt-1">{priceError}</p>
+              )}
             </div>
             <div>
               <label
                 htmlFor="item-icon"
                 className="block text-sm font-medium text-gray-600 mb-1"
               >
-                Icon
+                Icon (Single Emoji)
               </label>
               <input
                 type="text"
                 id="item-icon"
                 value={icon}
                 onChange={(e) => setIcon(e.target.value)}
-                placeholder="e.g., 🍕"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none text-gray-700 placeholder-gray-400 bg-white"
+                onBlur={() => handleBlur("icon")} // Track when field is touched
+                placeholder="e.g., 🍕 (enter one emoji)"
+                maxLength={2}
+                className={`w-full p-3 border rounded-lg focus:ring-2 outline-none text-gray-700 placeholder-gray-400 bg-white ${
+                  touchedFields.icon && iconError
+                    ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+                    : "border-gray-300 focus:ring-yellow-500 focus:border-yellow-500"
+                }`}
               />
+              {touchedFields.icon && iconError && (
+                <p className="text-xs text-red-500 mt-1">{iconError}</p>
+              )}
+              <p className="text-xs text-gray-500 mt-1">
+                Find emojis at:{" "}
+                <a
+                  href="https://emojicopy.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-yellow-600 hover:text-yellow-700 underline"
+                >
+                  emojicopy.com
+                </a>
+              </p>
             </div>
             <div>
               <label
                 htmlFor="item-icon-name"
                 className="block text-sm font-medium text-gray-600 mb-1"
               >
-                Icon Name (for accessibility)
+                Icon Alt Text (Optional)
               </label>
               <input
                 type="text"
                 id="item-icon-name"
                 value={iconName}
                 onChange={(e) => setIconName(e.target.value)}
-                placeholder="e.g., Pizza Slice"
+                placeholder="e.g., Delicious Pizza Slice"
                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none text-gray-700 placeholder-gray-400 bg-white"
               />
             </div>
