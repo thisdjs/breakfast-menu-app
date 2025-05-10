@@ -1,20 +1,16 @@
 import React from "react";
 import UIItemCard from "./ItemCard";
-import type { MenuItem as MenuItemTypeGrid } from "../types";
+import type { MenuItem } from "../types";
+import { useOrder } from "../contexts/OrderContext";
 
 interface CategoryGridProps {
   title: string;
-  items: MenuItemTypeGrid[];
-  onItemSelected?: (itemId: number) => void;
-  selectedItemIds: number[];
+  items: MenuItem[];
 }
 
-const CategoryGrid: React.FC<CategoryGridProps> = ({
-  title,
-  items,
-  onItemSelected,
-  selectedItemIds,
-}) => {
+const CategoryGrid: React.FC<CategoryGridProps> = ({ title, items }) => {
+  const { selectedItemIds, handleSelectItem } = useOrder();
+
   if (!items || items.length === 0) {
     return (
       <div className="py-6">
@@ -41,7 +37,7 @@ const CategoryGrid: React.FC<CategoryGridProps> = ({
             <UIItemCard
               key={item.id}
               item={item}
-              onSelect={onItemSelected}
+              onSelect={handleSelectItem}
               isSelected={selectedItemIds.includes(item.id)}
             />
           ))}

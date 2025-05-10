@@ -2,20 +2,14 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 import ItemCard from "./ItemCard";
 import type { MenuItem } from "../types";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { useOrder } from "../contexts/OrderContext";
 
 interface CarouselProps {
   title: string;
   items: MenuItem[];
-  selectedItemIds: number[];
-  onItemSelected?: (itemId: number) => void;
 }
 
-const Carousel: React.FC<CarouselProps> = ({
-  title,
-  items,
-  selectedItemIds,
-  onItemSelected,
-}) => {
+const Carousel: React.FC<CarouselProps> = ({ title, items }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -73,6 +67,8 @@ const Carousel: React.FC<CarouselProps> = ({
       });
     }
   };
+
+  const { selectedItemIds, handleSelectItem } = useOrder();
 
   if (!items || items.length === 0) {
     return (
@@ -132,7 +128,7 @@ const Carousel: React.FC<CarouselProps> = ({
                 key={item.id}
                 item={item}
                 isSelected={selectedItemIds.includes(item.id)}
-                onSelect={onItemSelected}
+                onSelect={handleSelectItem}
               />
             ))}
             <div className="flex-shrink-0 w-px"></div> {/* Spacer */}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect as useEffectModal } from "react";
 import type { MenuItem as MenuItemTypeModal } from "../types";
 import { XMarkIcon as ModalXMarkIcon } from "@heroicons/react/24/solid";
+import { useMenu } from "../contexts/MenuContext";
 
 // Simple regex to check if a string is a single emoji.
 // This is a basic check and might not cover all edge cases of complex emojis.
@@ -9,16 +10,14 @@ const EMOJI_REGEX = /^\p{Extended_Pictographic}$/u;
 interface CreateItemModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (item: Omit<MenuItemTypeModal, "id">) => void;
-  categories: string[];
 }
 
 const CreateItemModal: React.FC<CreateItemModalProps> = ({
   isOpen,
   onClose,
-  onSubmit,
-  categories,
 }) => {
+  const { categories, handleCreateNewItem } = useMenu();
+
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
@@ -61,13 +60,13 @@ const CreateItemModal: React.FC<CreateItemModalProps> = ({
       setIcon("");
       setIconName("");
       setTouchedFields({});
-      if (categories.length > 0) {
-        if (!category || !categories.includes(category)) {
-          setCategory(categories[0]);
-        }
-      } else {
-        setCategory("");
-      }
+      // if (categories.length > 0) {
+      //   if (!category || !categories.includes(category)) {
+      //     setCategory(categories[0]);
+      //   }
+      // } else {
+      //   setCategory("");
+      // }
     }
   }, [isOpen, categories]);
 
@@ -77,7 +76,6 @@ const CreateItemModal: React.FC<CreateItemModalProps> = ({
     setTouchedFields({ name: true, price: true, icon: true });
 
     if (!isFormValid) {
-      // No alert needed, inline errors will show. Button is disabled anyway.
       console.log("Form is invalid. Errors should be displayed.");
       return;
     }
@@ -85,10 +83,10 @@ const CreateItemModal: React.FC<CreateItemModalProps> = ({
       name: name.trim(),
       price: parseFloat(price),
       category: category || "Uncategorized",
-      icon: icon.trim() || "❓",
+      icon: icon.trim() || "",
       "icon-name": iconName.trim() || name.trim(),
     };
-    onSubmit(newItem);
+    handleCreateNewItem(newItem);
     onClose();
   };
 
@@ -161,7 +159,7 @@ const CreateItemModal: React.FC<CreateItemModalProps> = ({
                     {cat}
                   </option>
                 ))}
-                {/* <option value="NEW_CATEGORY">-- Add New Category --</option> */}
+                <option value="NEW_CATEGORY">-- Add New Category --</option>
               </select>
             </div>
             <div>

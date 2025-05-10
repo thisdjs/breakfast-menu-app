@@ -50,7 +50,7 @@ To get a local copy up and running, follow these simple steps.
     If you haven't already, clone your repository to your local machine.
 
     ```bash
-    git clone [https://github.com/thisdjs/breakfast-menu-app.git](https://github.com/thisdjs/breakfast-menu-app.git)
+    git clone https://github.com/thisdjs/breakfast-menu-app.git
     # Or using SSH:
     # git clone git@github.com:thisdjs/breakfast-menu-app.git
     cd breakfast-menu-app
